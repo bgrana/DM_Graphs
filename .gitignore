@@ -1,0 +1,10 @@
+**/*.log
+**/*.aux
+**/*.synctex.gz
+**/*.toc
+**/*.lof
+**/*.out
+**/*.make*
+**/*.d
+**/*.fls
+
