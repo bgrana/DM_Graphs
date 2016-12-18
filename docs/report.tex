@@ -1,6 +1,9 @@
 \documentclass[12pt, a4paper]{article}
 
 \usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
 
 %opening
 \title{Data Mining: Frequent Itemsets and Association rules}
@@ -10,7 +13,9 @@
 
 \maketitle
 
-\section*{Description}
+\section{Description}
+
+\subsection{Algorithm}
 For this assignment we had to implement the Spectral Clustering algorithm \cite{speclust01}. To do so, we used MATLAB and the \emph{Statistics and Machine Learning Toolbox}.
 
 We created a function that receives a list of edges \emph{E} and the number \emph{k} as parameters, and implemented the algorithm with the following steps:
@@ -31,7 +36,46 @@ $L = D^{1/2} \times A \times D^{1/2}$
 
 Our function returns a vector \emph{C} with tuples containing a point and its assigned cluster. 
 
-\section*{Instructions}
+\subsection{Example datasets analysis}
+
+When analysing the examples, we used the sparsity pattern plot to see the number of possible patterns and decide the \emph{k} parameter.
+
+\subsubsection{Example 1}
+For the first example, which is a real world graph based in the medical data collection from 4 towns, we have the following sparsity pattern:
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\textwidth]{../plots/sparsity_ex1.png}
+	\caption{Sparsity pattern for example 1}
+\end{figure}
+
+From this pattern we can easily see that we probably have 4 clusters, so we tried the algorithm with \emph{k = 4} and this is the result when showing the clusters over fiedler vector:
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.6\textwidth]{../plots/clusters_ex1.png}
+	\caption{Clusters over fiedler vector for example 1}
+\end{figure}
+
+\subsubsection{Example 2}
+For the second example, which is a generated graph, we found no clusters in the sparsity pattern plot as can be seen in \autoref{fig:sparsity2}:
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\textwidth]{../plots/sparsity_ex2.png}
+	\caption{Sparsity pattern for example 2}
+	\label{fig:sparsity2}
+\end{figure}
+
+Therefore, we tried several values of \emph{k} until we found one (\emph{k = 2}) that showed a reasonable clustering over the fiedler vector:
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.6\textwidth]{../plots/clusters_ex2.png}
+	\caption{Clusters over fiedler vector for example 2}
+\end{figure}
+
+\section{Instructions}
 To use our implementation:
 \begin{enumerate}
 \item Open MATLAB and change the current folder to the project root.
@@ -43,7 +87,6 @@ C = SpectralClustering(E, k);
 \end{lstlisting}
 \end{enumerate}
 
-\section*{References}
 \begin{thebibliography}{2}
 
 \bibitem{speclust01}
