@@ -1,4 +1,4 @@
-function [C, L, Y] = SpectralClustering(W, k)
+function C = SpectralClustering(W, k)
 
 % Calculate affinity matrix (using adjacency matrix)
 col1 = W(:,1);
