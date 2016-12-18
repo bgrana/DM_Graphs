@@ -1,5 +1,7 @@
 \documentclass[12pt, a4paper]{article}
 
+\usepackage{listings}
+
 %opening
 \title{Data Mining: Frequent Itemsets and Association rules}
 \author{Braulio Grana Guti\'errez \and Adri\'an Ram\'irez del R\'io}
@@ -9,11 +11,52 @@
 \maketitle
 
 \section*{Description}
+For this assignment we had to implement the Spectral Clustering algorithm \cite{speclust01}. To do so, we used MATLAB and the \emph{Statistics and Machine Learning Toolbox}.
 
+We created a function that receives a list of edges \emph{E} and the number \emph{k} as parameters, and implemented the algorithm with the following steps:
+
+\begin{enumerate}
+\item We use the adjacency matrix \emph{A} as affinity matrix.
+\item Build the degree matrix \emph{D}, which is a diagonal matrix whose \emph{(i,i)-elements} are the sum of A's \emph{i-th} row.
+\item Build the normalized Laplacian matrix \emph{L} using the following formula:
+\begin{center}
+$L = D^{1/2} \times A \times D^{1/2}$
+\end{center}
+\item Build matrix \emph{X} by finding the k largest eigenvectors of L and stacking them in columns. For this we used the MATLAB method \emph{eigs}.
+\item Renormalize each row of \emph{X} to have unit length (Store the result in \emph{Y})
+\item Use K-means from the \emph{Statistics and Machine Learning Toolbox} to find the \emph{k} clusters in \emph{Y}.
+\item Assign each original point to its cluster and return the result \emph{C}.
+
+\end{enumerate}
+
+Our function returns a vector \emph{C} with tuples containing a point and its assigned cluster. 
 
 \section*{Instructions}
-
+To use our implementation:
+\begin{enumerate}
+\item Open MATLAB and change the current folder to the project root.
+\item Then, in the MATLAB console, execute the following commands:
+\lstset{language=MATLAB}
+\begin{lstlisting}[frame=single]
+E = readcsv('Path_to_dataset');
+C = SpectralClustering(E, k);
+\end{lstlisting}
+\end{enumerate}
 
 \section*{References}
+\begin{thebibliography}{2}
+
+\bibitem{speclust01}
+  Andrew Ng, Michael I. Jordan and Yar Weiss,
+  \emph{On Spectral Clustering: Analysis and algorithm},
+  2001.
+
+\bibitem{luxburg07}
+  Ulrike von Luxburg,
+  \emph{A tutorial on Spectral Clustering},
+  2007.
+
+\end{thebibliography}
+
 
 \end{document}
